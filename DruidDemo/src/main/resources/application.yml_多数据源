@@ -1,0 +1,24 @@
+ spring:
+   datasource:
+      data1:
+         jdbc-url: jdbc:postgresql://127.0.0.1:5432/gwjc
+         userName: gwjc
+         password: gwjc
+         driver-class-name: org.postgresql.Driver
+      data2:
+         jdbc-url: jdbc:postgresql://127.0.0.1:5432/postgres
+         userName: gwjc
+         password: gwjc
+         driver-class-name: org.postgresql.Driver
+   jackson:
+       date-format: yyyy-MM-dd HH:mm:ss
+       time-zone: GMT+8
+ mybatis:
+   configuration:
+       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   
+ configtask:
+    cron: "0/30 * * * * ?" 
+ extract:
+    url: https://119.163.126.182:8089/dataManage/getDataHistory
+
+    
