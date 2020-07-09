@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dataManage.data1.mapper.Data1Mapper">
+    <insert id="insert" parameterType="java.util.Map">
+   		 INSERT INTO gwjc_moni_data(id,conf_id) VALUES (#{id}, #{confId})
+    </insert>
+    <select id="getHistoryList" parameterType="java.util.Map" resultType="Map">
+        select id,conf_id,data_value,data_time   from  gwjc_moni_data_history t
+        where 1=1
+		<if test="null != conf_id">AND conf_id = #{conf_id}</if>
+		<if test="null != start_date">AND data_time &gt; #{start_date}</if>
+		<if test="null != end_date"> AND data_time &lt; #{end_date}</if>
+		order by data_time
+    </select>
+</mapper>

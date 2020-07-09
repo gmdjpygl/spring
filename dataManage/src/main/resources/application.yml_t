@@ -1,0 +1,16 @@
+ spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    db1:
+      url: jdbc:mysql://localhost:3306/multipledatasource1?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+    db2:
+      url: jdbc:mysql://localhost:3306/multipledatasource2?characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+ mybatis:
+  type-aliases-package: app.entity
+  mapper-locations: classpath:mapper/*.xml
