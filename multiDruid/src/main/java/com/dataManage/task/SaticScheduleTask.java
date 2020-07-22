@@ -18,7 +18,7 @@ public class SaticScheduleTask {
 	private DataManageService dataManageService;
 	
     //3.添加定时任务
-    @Scheduled(cron = "${configtask.cron}")
+    //@Scheduled(cron = "${configtask.cron}")
     private void configureTasks() {
     	dataManageService.extractHttpData();
     }
