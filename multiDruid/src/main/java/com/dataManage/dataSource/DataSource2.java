@@ -12,6 +12,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 @Configuration//注解到spring容器中
@@ -23,9 +28,16 @@ public class DataSource2 {
      * @return
      */
     @Bean(name="data2Source")
-    @ConfigurationProperties(prefix = "spring.datasource.druid.data2")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.slave")
     public DataSource dataSource(){
-        return DataSourceBuilder.create().build();
+    	  DruidDataSource druidDataSource = new DruidDataSource();
+          try {
+			druidDataSource.setFilters("stat,wall,slf4j");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return  druidDataSource;
     }
 
     /**

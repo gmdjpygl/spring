@@ -13,57 +13,49 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
+
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 @Configuration//注解到spring容器中
 @MapperScan(basePackages = "com.dataManage.data1.mapper",sqlSessionFactoryRef = "data1SqlSessionFactory")
 public class DataSource1 {
 
-    /**
-     * 返回data1数据库的数据源
-     * @return
-     */
-    @Bean(name="data1Source")
-    @Primary//主数据源
-    @ConfigurationProperties(prefix = "spring.datasource.druid.data1")
-    public DataSource dataSource(){
-        return DataSourceBuilder.create().build();
+    @Bean(name = "data1Source")
+    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource.druid.master")
+    public DataSource dataSource() {
+    	 DruidDataSource druidDataSource = new DruidDataSource();
+         try {
+			druidDataSource.setFilters("stat,wall,slf4j");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       return  druidDataSource;
     }
-
-    /**
-     * 返回data1数据库的会话工厂
-     * @param ds
-     * @return
-     * @throws Exception
-     */
+    
     @Bean(name = "data1SqlSessionFactory")
     @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("data1Source") DataSource ds,MybatisProperties mybatisProperties) throws Exception{
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("data1Source") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(ds);
+        bean.setDataSource(dataSource);
         return bean.getObject();
     }
-
-    /**
-     * 返回data1数据库的会话模板
-     * @param sessionFactory
-     * @return
-     * @throws Exception
-     */
-    @Bean(name = "data1SqlSessionTemplate")
-    @Primary
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("data1SqlSessionFactory") SqlSessionFactory sessionFactory) throws  Exception{
-        return  new SqlSessionTemplate(sessionFactory);
-    }
-
-    /**
-     * 返回data1数据库的事务
-     * @param ds
-     * @return
-     */
+ 
     @Bean(name = "data1TransactionManager")
     @Primary
-    public DataSourceTransactionManager transactionManager(@Qualifier("data1Source") DataSource ds){
-        return new DataSourceTransactionManager(ds);
+    public DataSourceTransactionManager transactionManager(@Qualifier("data1Source") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+ 
+    @Bean(name = "data1SqlSessionTemplate")
+    @Primary
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("data1SqlSessionFactory") SqlSessionFactory sqlSessionFactory)
+            throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

@@ -4,11 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.dataManage.data1.service.Data1Service;
 import com.dataManage.service.DataManageService;
 import com.dataManage.util.GsonUtil;
@@ -17,17 +22,12 @@ import com.google.gson.Gson;
 @RestController
 public class DataManageController {
 	@Autowired
-	private Data1Service data1Service;
-	@Autowired
 	private DataManageService manageService;
+	@Autowired
+	private ApplicationContext applicationContext;
 
 	@RequestMapping("/add")
 	public String add() {
-		return data1Service.add();
-	}
-
-	@RequestMapping("/add2")
-	public String add2() {
 		return manageService.add();
 	}
 
@@ -50,6 +50,11 @@ public class DataManageController {
 	 */
 	@RequestMapping("/getDataHistory")
 	public Object getDataHistory(@RequestBody String json) {
+		
+		DruidDataSource d1=applicationContext.getBean("data1Source",DruidDataSource.class);  
+		System.out.println(d1.getName());
+		DruidDataSource d2=applicationContext.getBean("data2Source",DruidDataSource.class);  
+		System.out.println(d2.getName());
 		Map<String, String> map = GsonUtil.GsonToMaps(json);
 		List<Map<String, Object>> list = null;
 		String code = "200";
