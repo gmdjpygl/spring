@@ -24,8 +24,8 @@ public class DataManageController {
 	@Autowired
 	private DataManageService manageService;
 	@Autowired
-	private ApplicationContext applicationContext;
-
+	private ApplicationContext applicationContext ;
+     
 	@RequestMapping("/add")
 	public String add() {
 		return manageService.add();
