@@ -1,4 +1,4 @@
-package com.dataManage.data1.mapper;
+package com.dataManage.mapper.data1;
 
 import java.util.List;
 import java.util.Map;

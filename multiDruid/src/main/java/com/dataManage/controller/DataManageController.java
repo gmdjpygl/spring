@@ -3,21 +3,14 @@ package com.dataManage.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.druid.pool.DruidDataSource;
-import com.dataManage.data1.service.Data1Service;
 import com.dataManage.service.DataManageService;
 import com.dataManage.util.GsonUtil;
-import com.google.gson.Gson;
 
 @RestController
 public class DataManageController {
@@ -66,6 +59,32 @@ public class DataManageController {
 		} else {
 			list = manageService.getDataHistory(map);
 		}
+		Map<String, Object> reMap = new HashMap<String, Object>();
+		reMap.put("code", code);
+		reMap.put("message", message);
+		reMap.put("data", list);
+		return reMap;
+	}
+	@RequestMapping("/get1")
+	public Object get1() {
+		
+		List<Map<String, Object>> list = null;
+		String code = "200";
+		String message = "成功";
+		list = manageService.get1();
+		Map<String, Object> reMap = new HashMap<String, Object>();
+		reMap.put("code", code);
+		reMap.put("message", message);
+		reMap.put("data", list);
+		return reMap;
+	}
+	@RequestMapping("/get2")
+	public Object get2() {
+		
+		List<Map<String, Object>> list = null;
+		String code = "200";
+		String message = "成功";
+		list = manageService.get2();
 		Map<String, Object> reMap = new HashMap<String, Object>();
 		reMap.put("code", code);
 		reMap.put("message", message);

@@ -66,5 +66,13 @@ public class DataManageController {
 		reMap.put("data", list);
 		return reMap;
 	}
+	@RequestMapping("/get1")
+	public Object get1() {
+		List<Map<String, Object>> list = null;
+			list = manageService.get1();
+		Map<String, Object> reMap = new HashMap<String, Object>();
+		reMap.put("data", list);
+		return reMap;
+	}
 
 }

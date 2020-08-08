@@ -6,21 +6,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
-
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
 
 @Configuration//注解到spring容器中
-@MapperScan(basePackages = "com.dataManage.data2.mapper",sqlSessionFactoryRef = "data2SqlSessionFactory")
+@MapperScan(basePackages = "com.dataManage.mapper.data2",sqlSessionFactoryRef = "data2SqlSessionFactory")
 public class DataSource2 {
 
     /**
@@ -28,7 +23,7 @@ public class DataSource2 {
      * @return
      */
     @Bean(name="data2Source")
-    @ConfigurationProperties(prefix = "spring.datasource.druid.slave")
+    @ConfigurationProperties(prefix = "spring.datasource.druid.data2")
     public DataSource dataSource(){
     	  DruidDataSource druidDataSource = new DruidDataSource();
           try {

@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.dataManage.data1.mapper.Data1Mapper;
-import com.dataManage.data2.mapper.Data2Mapper;
+import com.dataManage.mapper.data1.Data1Mapper;
+import com.dataManage.mapper.data2.Data2Mapper;
 import com.dataManage.util.DateUtil;
 import com.dataManage.util.GsonUtil;
 import com.dataManage.util.HttpClientUtil;
@@ -45,6 +45,14 @@ public class DataManageService {
 		qMap.put("start_date", startDate);
 		qMap.put("end_date", endDate);
 		return data1Mapper.getHistoryList(qMap);
+	}
+	public List<Map<String,Object>> get1( ) {
+		return data1Mapper.getHistoryList(null);
+	}
+	public List<Map<String,Object>> get2( ) {
+		Map<String,Object> qMap = new HashMap<String, Object>();
+		qMap.put("conf_id", "2506");
+		return data2Mapper.getHistoryList(qMap);
 	}
 
 	public String  extractData() {

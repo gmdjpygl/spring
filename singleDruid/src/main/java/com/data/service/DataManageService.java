@@ -46,6 +46,11 @@ public class DataManageService {
 		qMap.put("end_date", endDate);
 		return data1Mapper.getHistoryList(qMap);
 	}
+	public List<Map<String,Object>> get1( ) {
+		Map<String,Object> qMap = new HashMap<String, Object>();
+		qMap.put("conf_id", "2506");
+		return data1Mapper.getHistoryList(qMap);
+	}
 
 	public String  extractData() {
 		// 1.查询上次抽取时间

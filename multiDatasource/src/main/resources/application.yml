@@ -17,7 +17,7 @@
    configuration:
        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   
  configtask:
-    cron: "0/30 * * * * ?" 
+    cron: "0/30 1 1 1 * ?" 
  extract:
     url: https://119.163.126.182:8089/dataManage/getDataHistory
 
