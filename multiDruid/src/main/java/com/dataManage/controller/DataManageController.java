@@ -3,6 +3,9 @@ package com.dataManage.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +21,7 @@ public class DataManageController {
 	private DataManageService manageService;
 	@Autowired
 	private ApplicationContext applicationContext ;
-     
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping("/add")
 	public String add() {
 		return manageService.add();
@@ -80,7 +83,7 @@ public class DataManageController {
 	}
 	@RequestMapping("/get2")
 	public Object get2() {
-		
+		logger.info("打印");
 		List<Map<String, Object>> list = null;
 		String code = "200";
 		String message = "成功";
