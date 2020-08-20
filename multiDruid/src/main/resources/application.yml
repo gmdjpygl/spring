@@ -2,17 +2,12 @@
    jackson:
        date-format: yyyy-MM-dd HH:mm:ss
        time-zone: GMT+8
- #mybatis:
-  #config-locations: classpath:mybatis-config.xml
-  # spring boot集成mybatis的方式打印sql
-  #configuration:
-    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    #log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
+
 
  logging:
-    name: a.log
-    #file:
-    # name: a.log
+    file: 
+       name:d:/logDemo/a.log
+      #path:
     level:
       # root: info 
       com:

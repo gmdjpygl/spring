@@ -13,5 +13,6 @@ public interface Data2Mapper {
 	int deleteDataHistory(Map<String, Object> map);
 
 	List<Map<String, Object>> getDataList(Map<String, Object> map);
+	
 	List<Map<String, Object>> getHistoryList(Map<String, Object> map);
 }

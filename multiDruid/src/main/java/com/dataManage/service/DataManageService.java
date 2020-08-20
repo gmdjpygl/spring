@@ -52,7 +52,8 @@ public class DataManageService {
 	public List<Map<String,Object>> get2( ) {
 		Map<String,Object> qMap = new HashMap<String, Object>();
 		qMap.put("conf_id", "2506");
-		return data2Mapper.getHistoryList(qMap);
+		List<Map<String,Object>> list = data2Mapper.getHistoryList(qMap);
+		return list;
 	}
 
 	public String  extractData() {

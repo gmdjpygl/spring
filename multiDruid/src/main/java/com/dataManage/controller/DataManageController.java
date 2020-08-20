@@ -83,7 +83,7 @@ public class DataManageController {
 	}
 	@RequestMapping("/get2")
 	public Object get2() {
-		logger.info("打印");
+		logger.info("get2");
 		List<Map<String, Object>> list = null;
 		String code = "200";
 		String message = "成功";

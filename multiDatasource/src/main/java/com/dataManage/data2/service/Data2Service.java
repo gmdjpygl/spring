@@ -24,5 +24,5 @@ public class Data2Service {
 		params.put("dataValue",11);
 		int update = dataMapper.insertData(params);
 		return update>0?"成功":"失败";
-	}
+	} 
 }
