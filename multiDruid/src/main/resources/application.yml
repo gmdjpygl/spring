@@ -2,14 +2,22 @@
    jackson:
        date-format: yyyy-MM-dd HH:mm:ss
        time-zone: GMT+8
-
-
+ #多数据源时datasourec.java无法默认引用mybatis.configration配置,需要手动引入,
+ mybatis:
+   configuration:
+      # 结果集内字段空时,返回null,否则不返回字段
+      call-setters-on-nulls: true
+      # 驼峰标示,只针对xml里bean映射,map结果集不起作用
+      map-underscore-to-camel-case: true
+ # 使用springboot自带的logback日志组件
  logging:
     file: 
-       name:d:/logDemo/a.log
-      #path:
+       # 日志保存路径
+       name: d:/logDemo/springBoot.log
     level:
-      # root: info 
+     # 项目日志级别
+     #root: info 
+     # 包日志级别
       com:
          dataManage:
            mapper: debug 

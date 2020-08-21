@@ -17,7 +17,11 @@ import javax.sql.DataSource;
 @Configuration//注解到spring容器中
 @MapperScan(basePackages = "com.dataManage.mapper.data2",sqlSessionFactoryRef = "data2SqlSessionFactory")
 public class DataSource2 {
-
+    @Bean(name="config2")
+    @ConfigurationProperties(prefix = "mybatis.configuration")
+    public org.apache.ibatis.session.Configuration globalConfiguration() {
+        return new org.apache.ibatis.session.Configuration();
+    }
     /**
      * 返回data2数据库的数据源
      * @return
@@ -43,9 +47,10 @@ public class DataSource2 {
      */
     @Bean(name = "data2SqlSessionFactory")
     @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("data2Source") DataSource ds) throws Exception{
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("data2Source") DataSource ds,@Qualifier("config2") org.apache.ibatis.session.Configuration config) throws Exception{
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(ds);
+        bean.setConfiguration(config);
         return bean.getObject();
     }
 
