@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.data.service.Data1Service;
 import com.data.service.DataManageService;
+import com.data.task.OrderJobThread;
 import com.data.util.GsonUtil;
 import com.google.gson.Gson;
 
@@ -20,7 +21,14 @@ public class DataManageController {
 	private Data1Service data1Service;
 	@Autowired
 	private DataManageService manageService;
-
+	@Autowired
+    private OrderJobThread orderJobThread;  //得到定时任务
+	
+	@RequestMapping("/setJob")
+	public void setJob() {
+		orderJobThread.setCron("0/10 * * * * ?");
+		
+	}
 	@RequestMapping("/add")
 	public String add() {
 		return data1Service.add();

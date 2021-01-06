@@ -12,7 +12,7 @@ import com.data.service.DataManageService;
 
 @Component
 @Configuration      //1.主要用于标记配置类，兼备Component的效果。
-@EnableScheduling   // 2.开启定时任务
+//@EnableScheduling   // 2.开启定时任务
 public class SaticScheduleTask {
 	@Autowired
 	private DataManageService dataManageService;
@@ -20,6 +20,7 @@ public class SaticScheduleTask {
     //3.添加定时任务
     @Scheduled(cron = "${configtask.cron}")
     private void configureTasks() {
-    	dataManageService.extractHttpData();
+    	System.out.println("-------configureTasks----------");
+    	//dataManageService.extractHttpData();
     }
 }
